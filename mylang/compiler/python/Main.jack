@@ -1,0 +1,69 @@
+class Main {
+// class
+‐level variable
+static int newAcctId;
+// Private variables(fields/properties)
+field int id;
+field String owner;
+field int balance;
+/** Constructs
+a new bank account */
+constructor Main new (String
+owner)
+{
+let id
+= newAcctId;
+let newAcctId = newAcctId + 1;
+let this.owner = owner;
+let balance
+= 0;
+return this;
+}
+/** Handles deposits */
+method void deposit (int amount)
+{
+let balance
+= balance+amount;
+return;
+}
+/** Handles withdrawls */
+method void withdraw (int amount){
+if (~(amount
+> balance))
+{
+let balance
+= balance
+‐amount;
+}
+return;
+}
+/** Prints information about this account. */
+method void printInfo ()
+{
+do Output.printInt(id);
+do Output.printString(owner);
+do Output.printInt(balance);
+return;
+}
+/** Disposes this account. */
+method void dispose ()
+{
+do Memory.deAlloc(this);
+return;
+}
+/** Prints information about this account. */
+method void printInfo ()
+{
+do Output.printInt(id);
+do Output.printString(owner);
+do Output.printInt(balance);
+return;
+}
+/** Disposes this account. */
+method void dispose ()
+{
+do Memory.deAlloc(this);
+return;
+}
+
+}

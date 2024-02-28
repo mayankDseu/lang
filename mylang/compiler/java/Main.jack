@@ -1,0 +1,94 @@
+class Main {
+    field int accountNumber, balance, newBalance,withdrawalAmount,depositAmount;
+    field String accountHolder;
+
+    method void init(int accNumber, String accHolder) {
+        let accountNumber = accNumber;
+        let accountHolder = accHolder;
+        let balance = 0;
+    }
+
+    method void deposit(int amount) {
+        if (amount > 0) {
+            let balance = balance + amount;
+            do Output.printString("Deposit successful. New balance: $");
+            do Output.printInt(balance);
+            do Output.println();
+        } else {
+            do Output.printString("Invalid deposit amount. Please enter a positive value.");
+            do Output.println();
+        }
+    }
+
+    method void withdraw(int amount) {
+        if (amount > 0 & amount < balance) {
+            let newBalance = balance - amount;
+            do Output.printString("Withdrawal successful. New balance: $");
+            do Output.printInt(newBalance);
+            do Output.println();
+        } else {
+            do Output.printString("Invalid withdrawal amount or insufficient funds.");
+            do Output.println();
+        }
+    }
+
+    method void displayBalance() {
+        do Output.printString("Account Number: ");
+        do Output.printInt(accountNumber);
+        do Output.println();
+        do Output.printString("Account Holder: ");
+        do Output.printString(accountHolder);
+        do Output.println();
+        do Output.printString("Balance: $");
+        do Output.printInt(balance);
+        do Output.println();
+    }
+
+    function void main() {
+       var int choice;
+    var String input;
+
+    do Output.printString("Enter Account Number: ");
+    let accountNumber = Keyboard.readInt();
+
+     do Output.printString("Enter Account Holder Name: ");
+        
+        let accountHolder = Keyboard.readLine();
+        do init(accountNumber, accountHolder);
+        
+        do Output.printString("\n1. Deposit");
+        do Output.printString("\n2. Withdraw");
+        do Output.printString("\n3. Check Balance");
+        do Output.printString("\n4. Exit");
+        do Output.printString("\nEnter your choice: ");
+
+        let choice = Keyboard.readInt();
+        if (choice = 1) {
+    do Output.printString("Enter deposit amount: $");
+    
+    let depositAmount = Keyboard.readInt();
+    do deposit(depositAmount);
+} else {
+    if (choice = 2) {
+        do Output.printString("Enter withdrawal amount: $");
+        
+        let withdrawalAmount = Keyboard.readInt();
+        do withdraw(withdrawalAmount);
+    } else {
+        if (choice = 3) {
+            do displayBalance();
+        } else {
+            if (choice = 4) {
+                do Output.printString("Exiting bank management system. Have a nice day!");
+                do Output.println();
+            } else {
+                do Output.printString("Invalid choice. Please enter a valid option.");
+                do Output.println();
+            }
+        }
+    }
+}
+return ;
+}   
+
+}

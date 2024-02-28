@@ -1,0 +1,55 @@
+/** Represents a bank account.
+ * A bank account has an owner, an id, and a balance.
+ * The id values start at 0 and increment by 1 each time a new account is created. */
+class BankAccount {
+    field String owner;
+    field int id;
+    field int balance;
+
+    /** Constructs a new bank account with a 0 balance. */
+    constructor BankAccount new(String owner) {
+        let this.owner = owner;
+        let this.id = BankAccount.getNewAccountId();
+        let this.balance = 0;
+        return this;
+    }
+
+    /** Gets a new account id. */
+    function int getNewAccountId() {
+        var int currentId;
+        let currentId = Memory.peek(Memory.SEGMENT_STATIC, 0);
+        do Memory.poke(Memory.SEGMENT_STATIC, 0, currentId + 1);
+        return currentId;
+    }
+
+    /** Deposits the given amount in this account. */
+    method void deposit(int amount) {
+        let this.balance = this.balance + amount;
+    }
+
+    /** Withdraws the given amount from this account. */
+    method void withdraw(int amount) {
+        if (amount <= this.balance) {
+            let this.balance = this.balance - amount;
+        } else {
+            do Output.printString("Insufficient funds\n");
+        }
+    }
+
+    /** Prints the data of this account. */
+    method void printInfo() {
+        do Output.printString("Account Owner: ");
+        do Output.printString(this.owner);
+        do Output.printString("\nAccount ID: ");
+        do Output.printInt(this.id);
+        do Output.printString("\nBalance: ");
+        do Output.printInt(this.balance);
+        do Output.printString("\n");
+    }
+
+    /** Disposes this account. */
+    method void dispose() {
+        // Add any cleanup logic if necessary
+        // This method can be extended to perform additional actions when an account is disposed
+    }
+}
